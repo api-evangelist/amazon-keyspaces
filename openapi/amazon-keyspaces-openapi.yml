@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: Amazon Keyspaces API
+  description: >-
+    The Amazon Keyspaces (for Apache Cassandra) API enables programmatic
+    management of Cassandra-compatible keyspaces and tables, including
+    creating and configuring keyspaces, tables, capacity modes, encryption
+    settings, and point-in-time recovery.
+  version: '2022-02-10'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+  - url: https://cassandra.{region}.amazonaws.com
+    description: Amazon Keyspaces regional endpoint
+    variables:
+      region:
+        default: us-east-1
+        description: AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+          - ca-central-1
+security:
+  - sigv4: []
+tags:
+  - name: Keyspaces
+    description: Operations for managing Cassandra keyspaces
+  - name: Tables
+    description: Operations for managing Cassandra tables
+  - name: Tags
+    description: Operations for tagging keyspace resources
+paths:
+  /:
+    post:
+      operationId: CreateKeyspace
+      summary: Create a keyspace
+      description: Creates a new Cassandra-compatible keyspace in Amazon Keyspaces.
+      tags:
+        - Keyspaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - keyspaceName
+              properties:
+                keyspaceName:
+                  type: string
+                replicationSpecification:
+                  type: object
+                tags:
+                  type: array
+                  items:
+                    type: object
+      responses:
+        '200':
+          description: Keyspace created
+        '400':
+          description: Bad request
+  /keyspaces:
+    get:
+      operationId: ListKeyspaces
+      summary: List keyspaces
+      description: Lists all the keyspaces in your account.
+      tags:
+        - Keyspaces
+      responses:
+        '200':
+          description: List of keyspaces
+  /keyspaces/{keyspaceName}:
+    get:
+      operationId: GetKeyspace
+      summary: Get keyspace details
+      description: Returns the name and resource ARN for the specified keyspace.
+      tags:
+        - Keyspaces
+      parameters:
+        - name: keyspaceName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Keyspace details
+    delete:
+      operationId: DeleteKeyspace
+      summary: Delete a keyspace
+      description: Deletes the specified keyspace and all tables in the keyspace.
+      tags:
+        - Keyspaces
+      parameters:
+        - name: keyspaceName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Keyspace deleted
+  /tables:
+    post:
+      operationId: CreateTable
+      summary: Create a table
+      description: Creates a new table in an Amazon Keyspaces keyspace.
+      tags:
+        - Tables
+      responses:
+        '200':
+          description: Table created
+  /tables/list:
+    get:
+      operationId: ListTables
+      summary: List tables
+      description: Lists all tables for the specified keyspace.
+      tags:
+        - Tables
+      responses:
+        '200':
+          description: List of tables
+  /tags:
+    post:
+      operationId: TagResource
+      summary: Tag a resource
+      description: Associates a set of tags with an Amazon Keyspaces resource.
+      tags:
+        - Tags
+      responses:
+        '200':
+          description: Tags added
+components:
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
