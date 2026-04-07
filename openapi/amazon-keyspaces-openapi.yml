@@ -45,8 +45,6 @@ tags:
     description: Operations for managing Cassandra keyspaces
   - name: Tables
     description: Operations for managing Cassandra tables
-  - name: Tags
-    description: Operations for tagging keyspace resources
 paths:
   /:
     post:
@@ -143,8 +141,7 @@ paths:
       operationId: TagResource
       summary: Amazon Keyspaces Tag a resource
       description: Associates a set of tags with an Amazon Keyspaces resource.
-      tags:
-        - Tags
+      tags: []
       responses:
         '200':
           description: Tags added
