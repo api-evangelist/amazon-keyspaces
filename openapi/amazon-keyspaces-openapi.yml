@@ -51,7 +51,7 @@ paths:
   /:
     post:
       operationId: CreateKeyspace
-      summary: Create a keyspace
+      summary: Amazon Keyspaces Create a keyspace
       description: Creates a new Cassandra-compatible keyspace in Amazon Keyspaces.
       tags:
         - Keyspaces
@@ -80,7 +80,7 @@ paths:
   /keyspaces:
     get:
       operationId: ListKeyspaces
-      summary: List keyspaces
+      summary: Amazon Keyspaces List keyspaces
       description: Lists all the keyspaces in your account.
       tags:
         - Keyspaces
@@ -90,7 +90,7 @@ paths:
   /keyspaces/{keyspaceName}:
     get:
       operationId: GetKeyspace
-      summary: Get keyspace details
+      summary: Amazon Keyspaces Get keyspace details
       description: Returns the name and resource ARN for the specified keyspace.
       tags:
         - Keyspaces
@@ -105,7 +105,7 @@ paths:
           description: Keyspace details
     delete:
       operationId: DeleteKeyspace
-      summary: Delete a keyspace
+      summary: Amazon Keyspaces Delete a keyspace
       description: Deletes the specified keyspace and all tables in the keyspace.
       tags:
         - Keyspaces
@@ -121,7 +121,7 @@ paths:
   /tables:
     post:
       operationId: CreateTable
-      summary: Create a table
+      summary: Amazon Keyspaces Create a table
       description: Creates a new table in an Amazon Keyspaces keyspace.
       tags:
         - Tables
@@ -131,7 +131,7 @@ paths:
   /tables/list:
     get:
       operationId: ListTables
-      summary: List tables
+      summary: Amazon Keyspaces List tables
       description: Lists all tables for the specified keyspace.
       tags:
         - Tables
@@ -141,7 +141,7 @@ paths:
   /tags:
     post:
       operationId: TagResource
-      summary: Tag a resource
+      summary: Amazon Keyspaces Tag a resource
       description: Associates a set of tags with an Amazon Keyspaces resource.
       tags:
         - Tags
