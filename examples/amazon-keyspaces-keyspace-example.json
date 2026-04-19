@@ -1,0 +1,5 @@
+{
+  "keyspaceName": "my_keyspace",
+  "resourceArn": "arn:aws:cassandra:us-east-1:123456789012:/keyspace/my_keyspace",
+  "replicationStrategy": "SINGLE_REGION"
+}

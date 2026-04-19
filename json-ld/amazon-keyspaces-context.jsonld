@@ -1,144 +1,39 @@
 {
   "@context": {
-    "@vocab": "https://schema.org/",
-    "keyspaces": "https://docs.aws.amazon.com/keyspaces/latest/APIReference/",
-    "aws": "https://aws.amazon.com/",
+    "@version": 1.1,
+    "keyspaces": "https://keyspaces.amazonaws.com/schema/",
     "schema": "https://schema.org/",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
     "dcterms": "http://purl.org/dc/terms/",
-
-    "Keyspace": {
-      "@id": "keyspaces:API_GetKeyspace",
-      "@context": {
-        "keyspaceName": {
-          "@id": "schema:name",
-          "@type": "xsd:string"
-        },
-        "resourceArn": {
-          "@id": "schema:identifier",
-          "@type": "xsd:string"
-        },
-        "replicationStrategy": {
-          "@id": "keyspaces:replicationStrategy",
-          "@type": "xsd:string"
-        },
-        "replicationRegions": {
-          "@id": "keyspaces:replicationRegions",
-          "@container": "@list"
-        }
-      }
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Keyspace": "keyspaces:Keyspace",
+    "Table": "keyspaces:Table",
+    "id": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
     },
-
-    "Table": {
-      "@id": "keyspaces:API_GetTable",
-      "@context": {
-        "keyspaceName": {
-          "@id": "keyspaces:keyspaceName",
-          "@type": "xsd:string"
-        },
-        "tableName": {
-          "@id": "schema:name",
-          "@type": "xsd:string"
-        },
-        "resourceArn": {
-          "@id": "schema:identifier",
-          "@type": "xsd:string"
-        },
-        "status": {
-          "@id": "keyspaces:tableStatus",
-          "@type": "xsd:string"
-        },
-        "creationTimestamp": {
-          "@id": "schema:dateCreated",
-          "@type": "xsd:dateTime"
-        },
-        "schemaDefinition": {
-          "@id": "keyspaces:schemaDefinition",
-          "@type": "keyspaces:SchemaDefinition"
-        },
-        "capacitySpecification": {
-          "@id": "keyspaces:capacitySpecification",
-          "@type": "keyspaces:CapacitySpecification"
-        },
-        "encryptionSpecification": {
-          "@id": "keyspaces:encryptionSpecification",
-          "@type": "keyspaces:EncryptionSpecification"
-        },
-        "pointInTimeRecovery": {
-          "@id": "keyspaces:pointInTimeRecovery",
-          "@type": "keyspaces:PointInTimeRecovery"
-        },
-        "ttl": {
-          "@id": "keyspaces:ttl",
-          "@type": "keyspaces:TimeToLive"
-        },
-        "defaultTimeToLive": {
-          "@id": "keyspaces:defaultTimeToLive",
-          "@type": "xsd:integer"
-        },
-        "comment": {
-          "@id": "schema:description",
-          "@type": "xsd:string"
-        },
-        "tags": {
-          "@id": "schema:keywords",
-          "@container": "@list"
-        }
-      }
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
     },
-
-    "SchemaDefinition": {
-      "@id": "keyspaces:SchemaDefinition",
-      "@context": {
-        "allColumns": {
-          "@id": "keyspaces:columns",
-          "@container": "@list"
-        },
-        "partitionKeys": {
-          "@id": "keyspaces:partitionKeys",
-          "@container": "@list"
-        },
-        "clusteringKeys": {
-          "@id": "keyspaces:clusteringKeys",
-          "@container": "@list"
-        },
-        "staticColumns": {
-          "@id": "keyspaces:staticColumns",
-          "@container": "@list"
-        }
-      }
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
     },
-
-    "CapacitySpecification": {
-      "@id": "keyspaces:CapacitySpecification",
-      "@context": {
-        "throughputMode": {
-          "@id": "keyspaces:throughputMode",
-          "@type": "xsd:string"
-        },
-        "readCapacityUnits": {
-          "@id": "keyspaces:readCapacityUnits",
-          "@type": "xsd:integer"
-        },
-        "writeCapacityUnits": {
-          "@id": "keyspaces:writeCapacityUnits",
-          "@type": "xsd:integer"
-        }
-      }
+    "status": {
+      "@id": "keyspaces:status",
+      "@type": "xsd:string"
     },
-
-    "EncryptionSpecification": {
-      "@id": "keyspaces:EncryptionSpecification",
-      "@context": {
-        "type": {
-          "@id": "keyspaces:encryptionType",
-          "@type": "xsd:string"
-        },
-        "kmsKeyIdentifier": {
-          "@id": "keyspaces:kmsKeyIdentifier",
-          "@type": "xsd:string"
-        }
-      }
+    "arn": {
+      "@id": "keyspaces:arn",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
     }
   }
 }

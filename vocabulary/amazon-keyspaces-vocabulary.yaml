@@ -1,0 +1,92 @@
+vocabulary: 1.0.0
+info:
+  provider: Amazon Keyspaces
+  description: Unified vocabulary for Amazon Keyspaces API operations and capability workflows.
+  created: '2026-04-19'
+  modified: '2026-04-19'
+operational:
+  apis:
+  - namespace: keyspaces
+    version: '2024-01-01'
+    status: active
+  resources:
+  - name: keyspaces
+    api: keyspaces
+    actions:
+    - create keyspace
+    - list keyspaces
+    - get keyspace
+    - delete keyspace
+  - name: tables
+    api: keyspaces
+    actions:
+    - create table
+    - list tables
+    - get table
+    - update table
+    - delete table
+    - restore table
+  actions:
+  - name: create
+    http_method: POST
+    pattern: write
+  - name: list
+    http_method: GET
+    pattern: read
+  - name: describe
+    http_method: GET
+    pattern: read
+  - name: update
+    http_method: PUT
+    pattern: write
+  - name: delete
+    http_method: DELETE
+    pattern: destructive
+  authentication:
+    schemes:
+    - type: apikey
+      header: Authorization
+      description: AWS Signature Version 4
+capability:
+  workflows:
+  - name: Amazon Keyspaces Workflow
+    file: capabilities/amazon-keyspaces-workflow.yaml
+    description: Unified workflow for Amazon Keyspaces resource management
+    apis_combined:
+    - keyspaces
+    tool_count: 6
+    personas:
+    - Developer
+    - Administrator
+  personas:
+  - id: developer
+    name: Developer
+    description: Integrates API into applications
+  - id: administrator
+    name: Administrator
+    description: Manages resources and configurations
+crossReference:
+- resource: keyspaces
+  operations:
+  - CreateKeyspace
+  - ListKeyspaces
+  - GetKeyspace
+  - DeleteKeyspace
+  workflows:
+  - Amazon Keyspaces Workflow
+  personas:
+  - Developer
+  - Administrator
+- resource: tables
+  operations:
+  - CreateTable
+  - ListTables
+  - GetTable
+  - UpdateTable
+  - DeleteTable
+  - RestoreTable
+  workflows:
+  - Amazon Keyspaces Workflow
+  personas:
+  - Developer
+  - Administrator

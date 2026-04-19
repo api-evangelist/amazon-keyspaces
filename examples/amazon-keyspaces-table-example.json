@@ -1,0 +1,7 @@
+{
+  "keyspaceName": "my_keyspace",
+  "tableName": "my_table",
+  "resourceArn": "arn:aws:cassandra:us-east-1:123456789012:/keyspace/my_keyspace/table/my_table",
+  "status": "ACTIVE",
+  "creationTimestamp": "2025-03-15T14:30:00Z"
+}

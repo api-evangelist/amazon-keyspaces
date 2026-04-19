@@ -1,0 +1,128 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amazon Keyspaces
+  description: Amazon Keyspaces API for managing keyspaces resources.
+  tags:
+  - Amazon Keyspaces
+  - AWS
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: keyspaces
+    baseUri: https://cassandra.us-east-1.amazonaws.com
+    description: Amazon Keyspaces service.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{AWS_ACCESS_KEY_ID}}'
+      placement: header
+    resources:
+    - name: keyspaces
+      path: /keyspaces
+      description: Cassandra keyspace management
+      operations:
+      - name: createkeyspace
+        method: POST
+        description: Creates a new keyspace.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listkeyspaces
+        method: GET
+        description: Returns a list of keyspaces.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getkeyspace
+        method: GET
+        description: Returns the name and the Amazon Resource Name (ARN) of a keyspace.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tables
+      path: /keyspaces/{keyspaceName}/tables
+      description: Cassandra table management
+      operations:
+      - name: createtable
+        method: POST
+        description: The CreateTable operation adds a new table to the specified keyspace.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listtables
+        method: GET
+        description: Returns a list of tables for a specified keyspace.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: gettable
+        method: GET
+        description: Returns information about the table.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8101
+    namespace: keyspaces-rest
+    resources: []
+  - type: mcp
+    port: 9101
+    namespace: keyspaces-mcp
+    transport: http
+    tools:
+    - name: createkeyspace
+      description: Creates a new keyspace.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: keyspaces.createkeyspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list
+      description: Returns a list of keyspaces.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: keyspaces.listkeyspaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createtable
+      description: The CreateTable operation adds a new table to the specified keyspace.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: keyspaces.createtable
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listtables
+      description: Returns a list of tables for a specified keyspace.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: keyspaces.listtables
+      outputParameters:
+      - type: object
+        mapping: $.

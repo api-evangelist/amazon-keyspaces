@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-keyspaces/refs/heads/main/json-structure/amazon-keyspaces-table-structure.json",
+  "name": "Table",
+  "description": "An Amazon Keyspaces table.",
+  "type": "object",
+  "properties": {
+    "keyspaceName": {
+      "type": "string",
+      "description": "The name of the keyspace that the table is associated with.",
+      "example": "my_keyspace"
+    },
+    "tableName": {
+      "type": "string",
+      "description": "The name of the table.",
+      "example": "my_table"
+    },
+    "resourceArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the table.",
+      "example": "arn:aws:cassandra:us-east-1:123456789012:/keyspace/my_keyspace/table/my_table"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the table.",
+      "example": "ACTIVE",
+      "enum": [
+        "ACTIVE",
+        "CREATING",
+        "UPDATING",
+        "DELETING",
+        "DELETED",
+        "RESTORING",
+        "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+      ]
+    },
+    "creationTimestamp": {
+      "type": "datetime",
+      "description": "The timestamp of when the table was created."
+    }
+  }
+}

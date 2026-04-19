@@ -1,12 +1,8 @@
 openapi: 3.1.0
 info:
   title: Amazon Keyspaces API
-  description: >-
-    The Amazon Keyspaces (for Apache Cassandra) API enables programmatic
-    management of Cassandra-compatible keyspaces and tables, including
-    creating and configuring keyspaces, tables, capacity modes, encryption
-    settings, and point-in-time recovery.
-  version: '2022-02-10'
+  description: The Amazon Keyspaces API provides programmatic access to manage Keyspaces resources.
+  version: '2024-01-01'
   contact:
     name: AWS Support
     url: https://aws.amazon.com/premiumsupport/
@@ -16,135 +12,281 @@ info:
   x-logo:
     url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 servers:
-  - url: https://cassandra.{region}.amazonaws.com
-    description: Amazon Keyspaces regional endpoint
-    variables:
-      region:
-        default: us-east-1
-        description: AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-          - ca-central-1
+- url: https://cassandra.us-east-1.amazonaws.com
+  description: Amazon Keyspaces endpoint
 security:
-  - sigv4: []
+- sigv4: []
 tags:
-  - name: Keyspaces
-    description: Operations for managing Cassandra keyspaces
-  - name: Tables
-    description: Operations for managing Cassandra tables
+- name: Keyspaces
+  description: Cassandra keyspace management
+- name: Tables
+  description: Cassandra table management
 paths:
-  /:
+  /keyspaces:
     post:
       operationId: CreateKeyspace
-      summary: Amazon Keyspaces Create a keyspace
-      description: Creates a new Cassandra-compatible keyspace in Amazon Keyspaces.
+      summary: Amazon Keyspaces Create Keyspace
+      description: Creates a new keyspace.
       tags:
-        - Keyspaces
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - keyspaceName
-              properties:
-                keyspaceName:
-                  type: string
-                replicationSpecification:
-                  type: object
-                tags:
-                  type: array
-                  items:
-                    type: object
+      - Keyspaces
       responses:
         '200':
-          description: Keyspace created
+          description: Success
         '400':
           description: Bad request
-  /keyspaces:
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     get:
       operationId: ListKeyspaces
-      summary: Amazon Keyspaces List keyspaces
-      description: Lists all the keyspaces in your account.
+      summary: Amazon Keyspaces List Keyspaces
+      description: Returns a list of keyspaces.
       tags:
-        - Keyspaces
+      - Keyspaces
       responses:
         '200':
-          description: List of keyspaces
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /keyspaces/{keyspaceName}:
     get:
       operationId: GetKeyspace
-      summary: Amazon Keyspaces Get keyspace details
-      description: Returns the name and resource ARN for the specified keyspace.
+      summary: Amazon Keyspaces Get Keyspace
+      description: Returns the name and the Amazon Resource Name (ARN) of a keyspace.
       tags:
-        - Keyspaces
+      - Keyspaces
       parameters:
-        - name: keyspaceName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: keyspaceName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The name of the keyspace.
       responses:
         '200':
-          description: Keyspace details
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteKeyspace
-      summary: Amazon Keyspaces Delete a keyspace
-      description: Deletes the specified keyspace and all tables in the keyspace.
+      summary: Amazon Keyspaces Delete Keyspace
+      description: The DeleteKeyspace operation allows you to delete a keyspace and all of its tables.
       tags:
-        - Keyspaces
+      - Keyspaces
       parameters:
-        - name: keyspaceName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: keyspaceName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The name of the keyspace.
       responses:
         '200':
-          description: Keyspace deleted
-  /tables:
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /keyspaces/{keyspaceName}/tables:
     post:
       operationId: CreateTable
-      summary: Amazon Keyspaces Create a table
-      description: Creates a new table in an Amazon Keyspaces keyspace.
+      summary: Amazon Keyspaces Create Table
+      description: The CreateTable operation adds a new table to the specified keyspace.
       tags:
-        - Tables
+      - Tables
+      parameters:
+      - name: keyspaceName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The keyspace name.
       responses:
         '200':
-          description: Table created
-  /tables/list:
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     get:
       operationId: ListTables
-      summary: Amazon Keyspaces List tables
-      description: Lists all tables for the specified keyspace.
+      summary: Amazon Keyspaces List Tables
+      description: Returns a list of tables for a specified keyspace.
       tags:
-        - Tables
+      - Tables
+      parameters:
+      - name: keyspaceName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The keyspace name.
       responses:
         '200':
-          description: List of tables
-  /tags:
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /keyspaces/{keyspaceName}/tables/{tableName}:
+    get:
+      operationId: GetTable
+      summary: Amazon Keyspaces Get Table
+      description: Returns information about the table.
+      tags:
+      - Tables
+      parameters:
+      - name: keyspaceName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The keyspace name.
+      - name: tableName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The table name.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: UpdateTable
+      summary: Amazon Keyspaces Update Table
+      description: Adds new columns to the table or updates one of the table's existing settings.
+      tags:
+      - Tables
+      parameters:
+      - name: keyspaceName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The keyspace name.
+      - name: tableName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The table name.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: DeleteTable
+      summary: Amazon Keyspaces Delete Table
+      description: The DeleteTable operation deletes a table and all of its data.
+      tags:
+      - Tables
+      parameters:
+      - name: keyspaceName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The keyspace name.
+      - name: tableName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The table name.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /keyspaces/{keyspaceName}/tables/{tableName}/restore:
     post:
-      operationId: TagResource
-      summary: Amazon Keyspaces Tag a resource
-      description: Associates a set of tags with an Amazon Keyspaces resource.
-      tags: []
+      operationId: RestoreTable
+      summary: Amazon Keyspaces Restore Table
+      description: Restores the table to the specified point in time within the earliest_restorable_timestamp and current time.
+      tags:
+      - Tables
+      parameters:
+      - name: keyspaceName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The keyspace name.
+      - name: tableName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The table name.
       responses:
         '200':
-          description: Tags added
+          description: Success
+        '400':
+          description: Bad request
+        '403':
+          description: Access denied
+        '500':
+          description: Internal server error
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     sigv4:
@@ -152,3 +294,52 @@ components:
       name: Authorization
       in: header
       description: AWS Signature Version 4 authentication
+  schemas:
+    Keyspace:
+      type: object
+      description: An Amazon Keyspaces keyspace (Cassandra database).
+      properties:
+        keyspaceName:
+          type: string
+          description: The name of the keyspace.
+          example: my_keyspace
+        resourceArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the keyspace.
+          example: arn:aws:cassandra:us-east-1:123456789012:/keyspace/my_keyspace
+        replicationStrategy:
+          type: string
+          description: The replication strategy of the keyspace.
+          example: SINGLE_REGION
+    Table:
+      type: object
+      description: An Amazon Keyspaces table.
+      properties:
+        keyspaceName:
+          type: string
+          description: The name of the keyspace that the table is associated with.
+          example: my_keyspace
+        tableName:
+          type: string
+          description: The name of the table.
+          example: my_table
+        resourceArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the table.
+          example: arn:aws:cassandra:us-east-1:123456789012:/keyspace/my_keyspace/table/my_table
+        status:
+          type: string
+          description: The current status of the table.
+          example: ACTIVE
+          enum:
+          - ACTIVE
+          - CREATING
+          - UPDATING
+          - DELETING
+          - DELETED
+          - RESTORING
+          - INACCESSIBLE_ENCRYPTION_CREDENTIALS
+        creationTimestamp:
+          type: string
+          description: The timestamp of when the table was created.
+          format: date-time

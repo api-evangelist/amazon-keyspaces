@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-keyspaces/refs/heads/main/json-schema/amazon-keyspaces-keyspace-schema.json",
+  "title": "Keyspace",
+  "description": "An Amazon Keyspaces keyspace (Cassandra database).",
+  "type": "object",
+  "properties": {
+    "keyspaceName": {
+      "type": "string",
+      "description": "The name of the keyspace.",
+      "example": "my_keyspace"
+    },
+    "resourceArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the keyspace.",
+      "example": "arn:aws:cassandra:us-east-1:123456789012:/keyspace/my_keyspace"
+    },
+    "replicationStrategy": {
+      "type": "string",
+      "description": "The replication strategy of the keyspace.",
+      "example": "SINGLE_REGION"
+    }
+  }
+}
