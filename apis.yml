@@ -125,6 +125,17 @@ common:
   url: capabilities/amazon-keyspaces-workflow.yaml
 - type: Vocabulary
   url: vocabulary/amazon-keyspaces-vocabulary.yaml
+- type: Integrations
+  url: https://aws.amazon.com/marketplace
+integrations:
+  - name: Agent Mode
+  - name: Sign in
+  - name: Become a Channel Partner
+  - name: Resources
+  - name: Sell in AWS Marketplace
+  - name: 'Why AWS Marketplace?'
+  - name: Get started in AWS Marketplace
+  - name: Manage Your Account
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
