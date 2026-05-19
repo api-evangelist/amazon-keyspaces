@@ -2,8 +2,8 @@ name: Amazon Keyspaces
 segments:
 - Databases
 - NoSQL
-description: Amazon Keyspaces (for Apache Cassandra) is a scalable, highly available, and managed Apache Cassandra-compatible database service that lets you run Cassandra workloads on AWS without 
-  managing servers or software.
+description: Amazon Keyspaces (for Apache Cassandra) is a scalable, highly available, and managed Apache Cassandra-compatible
+  database service that lets you run Cassandra workloads on AWS without managing servers or software.
 url: https://aws.amazon.com/keyspaces/
 type: Index
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
@@ -15,11 +15,11 @@ tags:
 - NoSQL
 - Wide Column
 created: '2024-01-15'
-modified: '2026-04-19'
+modified: '2026-05-19'
 apis:
 - name: Amazon Keyspaces API
-  description: The Amazon Keyspaces API provides programmatic access to manage Cassandra-compatible keyspaces and tables, configure capacity modes, encryption, and point-in-time recovery for 
-    serverless Cassandra workloads.
+  description: The Amazon Keyspaces API provides programmatic access to manage Cassandra-compatible keyspaces and tables,
+    configure capacity modes, encryption, and point-in-time recovery for serverless Cassandra workloads.
   image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
   humanURL: https://aws.amazon.com/keyspaces/
   baseURL: https://cassandra.amazonaws.com
@@ -52,6 +52,10 @@ apis:
     url: json-schema/amazon-keyspaces-keyspace-schema.json
   - type: JSONSchema
     url: json-schema/amazon-keyspaces-table-schema.json
+  - type: NaftikoCapability
+    url: capabilities/amazon-keyspaces-keyspaces.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-keyspaces-tables.yaml
 common:
 - type: Blog
   url: https://aws.amazon.com/blogs/database/category/database/amazon-keyspaces/
@@ -121,21 +125,19 @@ common:
     description: Control access to Keyspaces resources using IAM policies and roles.
 - type: SpectralRules
   url: rules/amazon-keyspaces-spectral-rules.yml
-- type: NaftikoCapability
-  url: capabilities/amazon-keyspaces-workflow.yaml
 - type: Vocabulary
   url: vocabulary/amazon-keyspaces-vocabulary.yaml
 - type: Integrations
   url: https://aws.amazon.com/marketplace
 integrations:
-  - name: Agent Mode
-  - name: Sign in
-  - name: Become a Channel Partner
-  - name: Resources
-  - name: Sell in AWS Marketplace
-  - name: 'Why AWS Marketplace?'
-  - name: Get started in AWS Marketplace
-  - name: Manage Your Account
+- name: Agent Mode
+- name: Sign in
+- name: Become a Channel Partner
+- name: Resources
+- name: Sell in AWS Marketplace
+- name: Why AWS Marketplace?
+- name: Get started in AWS Marketplace
+- name: Manage Your Account
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

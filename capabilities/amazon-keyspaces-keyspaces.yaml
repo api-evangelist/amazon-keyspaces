@@ -1,0 +1,174 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Keyspaces API — Keyspaces
+  description: 'Amazon Keyspaces API — Keyspaces. 4 operations. Lead operation: Amazon Keyspaces Create Keyspace. Self-contained
+    Naftiko capability covering one Amazon Keyspaces business surface.'
+  tags:
+  - Amazon Keyspaces
+  - Keyspaces
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_KEYSPACES_API_KEY: AMAZON_KEYSPACES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-keyspaces-keyspaces
+    baseUri: https://cassandra.us-east-1.amazonaws.com
+    description: Amazon Keyspaces API — Keyspaces business capability. Self-contained, no shared references.
+    resources:
+    - name: keyspaces
+      path: /keyspaces
+      operations:
+      - name: createkeyspace
+        method: POST
+        description: Amazon Keyspaces Create Keyspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listkeyspaces
+        method: GET
+        description: Amazon Keyspaces List Keyspaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: keyspaces-keyspaceName
+      path: /keyspaces/{keyspaceName}
+      operations:
+      - name: getkeyspace
+        method: GET
+        description: Amazon Keyspaces Get Keyspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: keyspaceName
+          in: path
+          type: string
+          description: The name of the keyspace.
+          required: true
+      - name: deletekeyspace
+        method: DELETE
+        description: Amazon Keyspaces Delete Keyspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: keyspaceName
+          in: path
+          type: string
+          description: The name of the keyspace.
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_KEYSPACES_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-keyspaces-keyspaces-rest
+    port: 8080
+    description: REST adapter for Amazon Keyspaces API — Keyspaces. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/keyspaces
+      name: keyspaces
+      description: REST surface for keyspaces.
+      operations:
+      - method: POST
+        name: createkeyspace
+        description: Amazon Keyspaces Create Keyspace
+        call: amazon-keyspaces-keyspaces.createkeyspace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listkeyspaces
+        description: Amazon Keyspaces List Keyspaces
+        call: amazon-keyspaces-keyspaces.listkeyspaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/keyspaces/{keyspacename}
+      name: keyspaces-keyspacename
+      description: REST surface for keyspaces-keyspaceName.
+      operations:
+      - method: GET
+        name: getkeyspace
+        description: Amazon Keyspaces Get Keyspace
+        call: amazon-keyspaces-keyspaces.getkeyspace
+        with:
+          keyspaceName: rest.keyspaceName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletekeyspace
+        description: Amazon Keyspaces Delete Keyspace
+        call: amazon-keyspaces-keyspaces.deletekeyspace
+        with:
+          keyspaceName: rest.keyspaceName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-keyspaces-keyspaces-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Keyspaces API — Keyspaces. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-keyspaces-create-keyspace
+      description: Amazon Keyspaces Create Keyspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-keyspaces-keyspaces.createkeyspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-keyspaces-list-keyspaces
+      description: Amazon Keyspaces List Keyspaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-keyspaces-keyspaces.listkeyspaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-keyspaces-get-keyspace
+      description: Amazon Keyspaces Get Keyspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-keyspaces-keyspaces.getkeyspace
+      with:
+        keyspaceName: tools.keyspaceName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-keyspaces-delete-keyspace
+      description: Amazon Keyspaces Delete Keyspace
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-keyspaces-keyspaces.deletekeyspace
+      with:
+        keyspaceName: tools.keyspaceName
+      outputParameters:
+      - type: object
+        mapping: $.
