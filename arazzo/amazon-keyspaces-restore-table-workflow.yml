@@ -1,0 +1,139 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Keyspaces Restore Table
+  summary: Restore a table to a point in time and wait for the restored copy to be ACTIVE.
+  description: >-
+    Point-in-time recovery flow for Amazon Keyspaces. The workflow confirms the
+    source table exists, issues a RestoreTable request that creates a new target
+    table from the source as of a supplied timestamp, then polls GetTable on the
+    target table until the service finishes the RESTORING transition and reports
+    ACTIVE. Amazon Keyspaces uses the AWS JSON 1.0 wire protocol, so the restore
+    step inlines the documented X-Amz-Target header and an
+    application/x-amz-json-1.0 body. The underlying OpenAPI description declares
+    no request body schemas, so the payload fields follow the canonical AWS
+    Keyspaces RestoreTable request contract.
+  version: 1.0.0
+sourceDescriptions:
+- name: keyspacesApi
+  url: ../openapi/amazon-keyspaces-openapi.yml
+  type: openapi
+workflows:
+- workflowId: restore-table
+  summary: Restore a table to a point in time and poll until the target is ACTIVE.
+  description: >-
+    Confirms the source table, restores it to a new target table at a given
+    timestamp, then polls the target table until it becomes ACTIVE.
+  inputs:
+    type: object
+    required:
+    - sourceKeyspaceName
+    - sourceTableName
+    - targetKeyspaceName
+    - targetTableName
+    properties:
+      sourceKeyspaceName:
+        type: string
+        description: The keyspace of the table being restored from.
+      sourceTableName:
+        type: string
+        description: The table being restored from.
+      targetKeyspaceName:
+        type: string
+        description: The keyspace the restored table will be created in.
+      targetTableName:
+        type: string
+        description: The name of the new restored table.
+      restoreTimestamp:
+        type: string
+        description: >-
+          Optional point in time to restore to (ISO 8601). When omitted the
+          service restores to the current time.
+  steps:
+  - stepId: confirmSource
+    description: >-
+      Read the source table to confirm it exists and is ACTIVE before starting
+      the restore.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.sourceKeyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.sourceTableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "ACTIVE"
+      type: jsonpath
+    outputs:
+      sourceArn: $response.body#/resourceArn
+  - stepId: restore
+    description: >-
+      Restore the source table to a new target table at the supplied timestamp.
+    operationId: RestoreTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.sourceKeyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.sourceTableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.RestoreTable
+    requestBody:
+      contentType: application/x-amz-json-1.0
+      payload:
+        sourceKeyspaceName: $inputs.sourceKeyspaceName
+        sourceTableName: $inputs.sourceTableName
+        targetKeyspaceName: $inputs.targetKeyspaceName
+        targetTableName: $inputs.targetTableName
+        restoreTimestamp: $inputs.restoreTimestamp
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      restoredTableArn: $response.body#/restoredTableARN
+  - stepId: waitForActive
+    description: >-
+      Poll the restored target table until the service completes the RESTORING
+      transition and reports ACTIVE. While the status is RESTORING the step
+      loops back on itself.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.targetKeyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.targetTableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      tableArn: $response.body#/resourceArn
+      creationTimestamp: $response.body#/creationTimestamp
+    onSuccess:
+    - name: stillRestoring
+      type: goto
+      stepId: waitForActive
+      criteria:
+      - context: $response.body
+        condition: $.status == "RESTORING"
+        type: jsonpath
+    - name: restored
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACTIVE"
+        type: jsonpath
+  outputs:
+    restoredTableArn: $steps.waitForActive.outputs.tableArn
+    status: $steps.waitForActive.outputs.status
+    creationTimestamp: $steps.waitForActive.outputs.creationTimestamp

@@ -57,6 +57,27 @@ apis:
   - type: NaftikoCapability
     url: capabilities/amazon-keyspaces-tables.yaml
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amazon-keyspaces-clone-table-workflow.yml
+    name: Amazon Keyspaces Clone Table Schema
+    summary: Read a source table's schema and create a new table from it in a target keyspace.
+  - url: arazzo/amazon-keyspaces-decommission-keyspace-workflow.yml
+    name: Amazon Keyspaces Decommission Keyspace
+    summary: Delete a table, wait for it to drain, then delete its keyspace.
+  - url: arazzo/amazon-keyspaces-keyspace-inventory-workflow.yml
+    name: Amazon Keyspaces Keyspace Inventory
+    summary: Confirm a keyspace, add a table, then list its tables to verify the table appears.
+  - url: arazzo/amazon-keyspaces-provision-table-workflow.yml
+    name: Amazon Keyspaces Provision Table
+    summary: Create a keyspace, add a table to it, and wait until the table is ACTIVE.
+  - url: arazzo/amazon-keyspaces-restore-table-workflow.yml
+    name: Amazon Keyspaces Restore Table
+    summary: Restore a table to a point in time and wait for the restored copy to be ACTIVE.
+  - url: arazzo/amazon-keyspaces-update-table-schema-workflow.yml
+    name: Amazon Keyspaces Update Table Schema
+    summary: Add columns to an existing table and wait for it to return to ACTIVE.
 - type: Blog
   url: https://aws.amazon.com/blogs/database/category/database/amazon-keyspaces/
 - type: Support

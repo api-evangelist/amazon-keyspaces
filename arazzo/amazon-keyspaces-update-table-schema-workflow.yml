@@ -1,0 +1,128 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Keyspaces Update Table Schema
+  summary: Add columns to an existing table and wait for it to return to ACTIVE.
+  description: >-
+    Safely evolves the schema of an existing Amazon Keyspaces table. The
+    workflow first reads the table to confirm it is ACTIVE before mutating it,
+    issues an UpdateTable request to add new columns, then polls GetTable until
+    the service reports the table is ACTIVE again. Amazon Keyspaces uses the AWS
+    JSON 1.0 wire protocol, so the write step inlines the documented
+    X-Amz-Target header and an application/x-amz-json-1.0 body. The underlying
+    OpenAPI description declares no request body schemas, so the payload fields
+    follow the canonical AWS Keyspaces UpdateTable request contract.
+  version: 1.0.0
+sourceDescriptions:
+- name: keyspacesApi
+  url: ../openapi/amazon-keyspaces-openapi.yml
+  type: openapi
+workflows:
+- workflowId: update-table-schema
+  summary: Add columns to a table and poll until the table is ACTIVE again.
+  description: >-
+    Confirms the table is ACTIVE, adds columns via UpdateTable, then polls
+    GetTable until the status returns to ACTIVE.
+  inputs:
+    type: object
+    required:
+    - keyspaceName
+    - tableName
+    - addColumns
+    properties:
+      keyspaceName:
+        type: string
+        description: The keyspace that owns the table.
+      tableName:
+        type: string
+        description: The table whose schema is being updated.
+      addColumns:
+        type: array
+        description: >-
+          The list of column definitions to add, as defined by the Amazon
+          Keyspaces UpdateTable request.
+        items:
+          type: object
+  steps:
+  - stepId: confirmActive
+    description: >-
+      Read the table and confirm it is ACTIVE before applying a schema change.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "ACTIVE"
+      type: jsonpath
+    outputs:
+      status: $response.body#/status
+  - stepId: addColumns
+    description: >-
+      Add the supplied columns to the table.
+    operationId: UpdateTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.UpdateTable
+    requestBody:
+      contentType: application/x-amz-json-1.0
+      payload:
+        keyspaceName: $inputs.keyspaceName
+        tableName: $inputs.tableName
+        addColumns: $inputs.addColumns
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tableArn: $response.body#/resourceArn
+  - stepId: waitForActive
+    description: >-
+      Poll the table until the schema change settles and the service reports the
+      status as ACTIVE again. While the status is UPDATING the step loops back
+      on itself.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      tableArn: $response.body#/resourceArn
+    onSuccess:
+    - name: stillUpdating
+      type: goto
+      stepId: waitForActive
+      criteria:
+      - context: $response.body
+        condition: $.status == "UPDATING"
+        type: jsonpath
+    - name: settled
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACTIVE"
+        type: jsonpath
+  outputs:
+    tableArn: $steps.waitForActive.outputs.tableArn
+    status: $steps.waitForActive.outputs.status

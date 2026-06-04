@@ -1,0 +1,149 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Keyspaces Keyspace Inventory
+  summary: Confirm a keyspace, add a table, then list its tables to verify the table appears.
+  description: >-
+    Verification flow that establishes a known-good inventory for an Amazon
+    Keyspaces keyspace. The workflow confirms the keyspace exists, lists its
+    current tables, adds a new table, polls GetTable until the table is ACTIVE,
+    and finally lists the keyspace tables again to verify the new table is
+    present. Amazon Keyspaces uses the AWS JSON 1.0 wire protocol, so the create
+    step inlines the documented X-Amz-Target header and an
+    application/x-amz-json-1.0 body. The underlying OpenAPI description declares
+    no request body schemas, so the create payload fields follow the canonical
+    AWS Keyspaces CreateTable request contract.
+  version: 1.0.0
+sourceDescriptions:
+- name: keyspacesApi
+  url: ../openapi/amazon-keyspaces-openapi.yml
+  type: openapi
+workflows:
+- workflowId: keyspace-inventory
+  summary: Confirm a keyspace, add a table, and verify it appears in the table listing.
+  description: >-
+    Confirms the keyspace, lists existing tables, creates a new table, waits for
+    it to become ACTIVE, and re-lists the tables to confirm the new table is
+    present.
+  inputs:
+    type: object
+    required:
+    - keyspaceName
+    - tableName
+    - schemaDefinition
+    properties:
+      keyspaceName:
+        type: string
+        description: The keyspace to inventory and add a table to.
+      tableName:
+        type: string
+        description: The name of the table to create.
+      schemaDefinition:
+        type: object
+        description: >-
+          The Cassandra schema definition for the new table, as defined by the
+          Amazon Keyspaces CreateTable request.
+  steps:
+  - stepId: confirmKeyspace
+    description: >-
+      Confirm the keyspace exists before inventorying it.
+    operationId: GetKeyspace
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetKeyspace
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      keyspaceArn: $response.body#/resourceArn
+  - stepId: listBefore
+    description: >-
+      List the tables currently in the keyspace before adding the new one.
+    operationId: ListTables
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.ListTables
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tablesBefore: $response.body#/tables
+  - stepId: createTable
+    description: >-
+      Create the new table in the keyspace.
+    operationId: CreateTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.CreateTable
+    requestBody:
+      contentType: application/x-amz-json-1.0
+      payload:
+        keyspaceName: $inputs.keyspaceName
+        tableName: $inputs.tableName
+        schemaDefinition: $inputs.schemaDefinition
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tableArn: $response.body#/resourceArn
+  - stepId: waitForActive
+    description: >-
+      Poll the new table until the service reports its status as ACTIVE. While
+      the status is CREATING the step loops back on itself.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: stillCreating
+      type: goto
+      stepId: waitForActive
+      criteria:
+      - context: $response.body
+        condition: $.status == "CREATING"
+        type: jsonpath
+    - name: active
+      type: goto
+      stepId: listAfter
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACTIVE"
+        type: jsonpath
+  - stepId: listAfter
+    description: >-
+      List the keyspace tables again to verify the new table is now present.
+    operationId: ListTables
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.ListTables
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tablesAfter: $response.body#/tables
+  outputs:
+    keyspaceArn: $steps.confirmKeyspace.outputs.keyspaceArn
+    tableArn: $steps.createTable.outputs.tableArn
+    tablesAfter: $steps.listAfter.outputs.tablesAfter

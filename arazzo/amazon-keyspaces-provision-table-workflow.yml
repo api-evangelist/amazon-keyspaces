@@ -1,0 +1,144 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Keyspaces Provision Table
+  summary: Create a keyspace, add a table to it, and wait until the table is ACTIVE.
+  description: >-
+    End-to-end provisioning flow for Amazon Keyspaces (managed Apache
+    Cassandra). The workflow creates a new keyspace, adds a table to that
+    keyspace with a supplied schema definition, then polls GetTable in a loop
+    until the table status reported by the service transitions to ACTIVE, and
+    finally reads the table back to capture its ARN and creation timestamp.
+    Amazon Keyspaces uses the AWS JSON 1.0 wire protocol, so every write step
+    inlines the documented X-Amz-Target header and an application/x-amz-json-1.0
+    request body. The underlying OpenAPI description declares no request body
+    schemas, so the payload fields below follow the canonical AWS Keyspaces
+    request contract.
+  version: 1.0.0
+sourceDescriptions:
+- name: keyspacesApi
+  url: ../openapi/amazon-keyspaces-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-table
+  summary: Create a keyspace and table, then wait for the table to become ACTIVE.
+  description: >-
+    Creates a keyspace, creates a table in it, polls GetTable until the table
+    status is ACTIVE, and returns the table ARN and creation timestamp.
+  inputs:
+    type: object
+    required:
+    - keyspaceName
+    - tableName
+    - schemaDefinition
+    properties:
+      keyspaceName:
+        type: string
+        description: The name of the keyspace to create (e.g. my_keyspace).
+      tableName:
+        type: string
+        description: The name of the table to create in the keyspace.
+      schemaDefinition:
+        type: object
+        description: >-
+          The Cassandra schema definition for the table, with allColumns and
+          partitionKeys as defined by the Amazon Keyspaces CreateTable request.
+  steps:
+  - stepId: createKeyspace
+    description: >-
+      Create the keyspace that will hold the new table.
+    operationId: CreateKeyspace
+    requestBody:
+      contentType: application/x-amz-json-1.0
+      payload:
+        keyspaceName: $inputs.keyspaceName
+    parameters:
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.CreateKeyspace
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      keyspaceArn: $response.body#/resourceArn
+  - stepId: createTable
+    description: >-
+      Add the table to the newly created keyspace using the supplied schema
+      definition.
+    operationId: CreateTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.CreateTable
+    requestBody:
+      contentType: application/x-amz-json-1.0
+      payload:
+        keyspaceName: $inputs.keyspaceName
+        tableName: $inputs.tableName
+        schemaDefinition: $inputs.schemaDefinition
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tableArn: $response.body#/resourceArn
+  - stepId: waitForActive
+    description: >-
+      Poll the table until the service reports its status as ACTIVE. While the
+      status is still CREATING the step loops back on itself; once ACTIVE the
+      flow proceeds to read the final table state.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: stillCreating
+      type: goto
+      stepId: waitForActive
+      criteria:
+      - context: $response.body
+        condition: $.status == "CREATING"
+        type: jsonpath
+    - name: nowActive
+      type: goto
+      stepId: describeTable
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACTIVE"
+        type: jsonpath
+  - stepId: describeTable
+    description: >-
+      Read the final table state once it is ACTIVE to capture the ARN and
+      creation timestamp.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tableArn: $response.body#/resourceArn
+      status: $response.body#/status
+      creationTimestamp: $response.body#/creationTimestamp
+  outputs:
+    keyspaceArn: $steps.createKeyspace.outputs.keyspaceArn
+    tableArn: $steps.describeTable.outputs.tableArn
+    status: $steps.describeTable.outputs.status
+    creationTimestamp: $steps.describeTable.outputs.creationTimestamp

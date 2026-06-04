@@ -1,0 +1,143 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Keyspaces Clone Table Schema
+  summary: Read a source table's schema and create a new table from it in a target keyspace.
+  description: >-
+    Duplicates the schema of an existing Amazon Keyspaces table into a new
+    table. The workflow reads the source table to capture its schema definition,
+    confirms the target keyspace exists, creates a new table in the target
+    keyspace using the captured schema, and polls GetTable until the new table
+    becomes ACTIVE. Amazon Keyspaces uses the AWS JSON 1.0 wire protocol, so the
+    create step inlines the documented X-Amz-Target header and an
+    application/x-amz-json-1.0 body. The underlying OpenAPI description declares
+    no request body schemas, so the create payload fields follow the canonical
+    AWS Keyspaces CreateTable request contract.
+  version: 1.0.0
+sourceDescriptions:
+- name: keyspacesApi
+  url: ../openapi/amazon-keyspaces-openapi.yml
+  type: openapi
+workflows:
+- workflowId: clone-table
+  summary: Clone a source table's schema into a new table in a target keyspace.
+  description: >-
+    Reads the source table schema, confirms the target keyspace, creates the new
+    table from the source schema, and polls until the new table is ACTIVE.
+  inputs:
+    type: object
+    required:
+    - sourceKeyspaceName
+    - sourceTableName
+    - targetKeyspaceName
+    - targetTableName
+    properties:
+      sourceKeyspaceName:
+        type: string
+        description: The keyspace of the table being cloned.
+      sourceTableName:
+        type: string
+        description: The table whose schema is being cloned.
+      targetKeyspaceName:
+        type: string
+        description: The keyspace the cloned table will be created in.
+      targetTableName:
+        type: string
+        description: The name of the new cloned table.
+  steps:
+  - stepId: readSource
+    description: >-
+      Read the source table to capture its schema definition.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.sourceKeyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.sourceTableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "ACTIVE"
+      type: jsonpath
+    outputs:
+      schemaDefinition: $response.body#/schemaDefinition
+  - stepId: confirmTargetKeyspace
+    description: >-
+      Confirm the target keyspace exists before creating the cloned table in it.
+    operationId: GetKeyspace
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.targetKeyspaceName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetKeyspace
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      keyspaceArn: $response.body#/resourceArn
+  - stepId: createClone
+    description: >-
+      Create the new table in the target keyspace using the schema captured from
+      the source table.
+    operationId: CreateTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.targetKeyspaceName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.CreateTable
+    requestBody:
+      contentType: application/x-amz-json-1.0
+      payload:
+        keyspaceName: $inputs.targetKeyspaceName
+        tableName: $inputs.targetTableName
+        schemaDefinition: $steps.readSource.outputs.schemaDefinition
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tableArn: $response.body#/resourceArn
+  - stepId: waitForActive
+    description: >-
+      Poll the cloned table until the service reports its status as ACTIVE.
+      While the status is CREATING the step loops back on itself.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.targetKeyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.targetTableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      tableArn: $response.body#/resourceArn
+      creationTimestamp: $response.body#/creationTimestamp
+    onSuccess:
+    - name: stillCreating
+      type: goto
+      stepId: waitForActive
+      criteria:
+      - context: $response.body
+        condition: $.status == "CREATING"
+        type: jsonpath
+    - name: active
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACTIVE"
+        type: jsonpath
+  outputs:
+    clonedTableArn: $steps.waitForActive.outputs.tableArn
+    status: $steps.waitForActive.outputs.status
+    creationTimestamp: $steps.waitForActive.outputs.creationTimestamp

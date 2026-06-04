@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Keyspaces Decommission Keyspace
+  summary: Delete a table, wait for it to drain, then delete its keyspace.
+  description: >-
+    Ordered teardown for Amazon Keyspaces. Because deleting a keyspace also
+    deletes its tables, this workflow performs a controlled decommission of a
+    single named table first: it deletes the table, polls GetTable until the
+    service reports the table is gone (GetTable returns 400 once the table no
+    longer exists), and only then deletes the parent keyspace. Amazon Keyspaces
+    uses the AWS JSON 1.0 wire protocol, so the delete steps inline the
+    documented X-Amz-Target header. The underlying OpenAPI description declares
+    no request body schemas, so the delete payload fields follow the canonical
+    AWS Keyspaces request contract.
+  version: 1.0.0
+sourceDescriptions:
+- name: keyspacesApi
+  url: ../openapi/amazon-keyspaces-openapi.yml
+  type: openapi
+workflows:
+- workflowId: decommission-keyspace
+  summary: Delete a table, wait for it to be removed, then delete the keyspace.
+  description: >-
+    Deletes a named table, polls GetTable until the table is gone, and then
+    deletes the parent keyspace.
+  inputs:
+    type: object
+    required:
+    - keyspaceName
+    - tableName
+    properties:
+      keyspaceName:
+        type: string
+        description: The keyspace to decommission.
+      tableName:
+        type: string
+        description: The table to delete before deleting the keyspace.
+  steps:
+  - stepId: deleteTable
+    description: >-
+      Delete the table and all of its data.
+    operationId: DeleteTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.DeleteTable
+    requestBody:
+      contentType: application/x-amz-json-1.0
+      payload:
+        keyspaceName: $inputs.keyspaceName
+        tableName: $inputs.tableName
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: waitForGone
+    description: >-
+      Poll the table until it no longer exists. While the table is still
+      reported as DELETING with a 200 the step loops back on itself; once
+      GetTable returns 400 the table is gone and the flow proceeds to delete the
+      keyspace.
+    operationId: GetTable
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: tableName
+      in: path
+      value: $inputs.tableName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.GetTable
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 400
+    onSuccess:
+    - name: stillDeleting
+      type: goto
+      stepId: waitForGone
+      criteria:
+      - condition: $statusCode == 200
+    - name: gone
+      type: goto
+      stepId: deleteKeyspace
+      criteria:
+      - condition: $statusCode == 400
+  - stepId: deleteKeyspace
+    description: >-
+      Delete the now-empty keyspace.
+    operationId: DeleteKeyspace
+    parameters:
+    - name: keyspaceName
+      in: path
+      value: $inputs.keyspaceName
+    - name: X-Amz-Target
+      in: header
+      value: KeyspacesService.DeleteKeyspace
+    requestBody:
+      contentType: application/x-amz-json-1.0
+      payload:
+        keyspaceName: $inputs.keyspaceName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      statusCode: $statusCode
+  outputs:
+    deleteKeyspaceStatus: $steps.deleteKeyspace.outputs.statusCode
