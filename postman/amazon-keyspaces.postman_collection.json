@@ -1,0 +1,2056 @@
+{
+  "info": {
+    "_postman_id": "4142bd6e-ccdb-465a-aefe-f5814cca0aab",
+    "name": "Amazon Keyspaces API",
+    "description": "The Amazon Keyspaces API provides programmatic access to manage Keyspaces resources.\n\nContact Support:\n Name: AWS Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:04:29.000Z",
+    "updatedAt": "2026-06-05T15:04:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4142bd6e-ccdb-465a-aefe-f5814cca0aab"
+  },
+  "item": [
+    {
+      "name": "keyspaces",
+      "item": [
+        {
+          "name": "{keyspaceName}",
+          "item": [
+            {
+              "name": "tables",
+              "item": [
+                {
+                  "name": "{tableName}",
+                  "item": [
+                    {
+                      "name": "restore",
+                      "item": [
+                        {
+                          "name": "Amazon Keyspaces Restore Table",
+                          "id": "b55a6250-e70f-47ca-855f-eed13178189f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName/restore",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName",
+                                "restore"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "cc8a0bf1-65f5-4b50-9ad1-5374e4fc931d",
+                                  "key": "keyspaceName",
+                                  "value": "<string>",
+                                  "description": "(Required) The keyspace name."
+                                },
+                                {
+                                  "id": "c614e692-026d-4e72-b6ec-b8834224f72c",
+                                  "key": "tableName",
+                                  "value": "<string>",
+                                  "description": "(Required) The table name."
+                                }
+                              ]
+                            },
+                            "description": "Restores the table to the specified point in time within the earliest_restorable_timestamp and current time."
+                          },
+                          "response": [
+                            {
+                              "id": "c699010a-7307-4e90-8445-6736500d72fd",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName/restore",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "keyspaces",
+                                    ":keyspaceName",
+                                    "tables",
+                                    ":tableName",
+                                    "restore"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "keyspaceName"
+                                    },
+                                    {
+                                      "key": "tableName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:04:30.000Z",
+                              "updatedAt": "2026-06-05T15:04:30.000Z",
+                              "uid": "35240-c699010a-7307-4e90-8445-6736500d72fd"
+                            },
+                            {
+                              "id": "3edbea72-785e-49f8-9a2c-62a36e353760",
+                              "name": "Bad request",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName/restore",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "keyspaces",
+                                    ":keyspaceName",
+                                    "tables",
+                                    ":tableName",
+                                    "restore"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "keyspaceName"
+                                    },
+                                    {
+                                      "key": "tableName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:04:30.000Z",
+                              "updatedAt": "2026-06-05T15:04:30.000Z",
+                              "uid": "35240-3edbea72-785e-49f8-9a2c-62a36e353760"
+                            },
+                            {
+                              "id": "a6dc3ce8-de85-40bf-a74a-d12c98e2d2ec",
+                              "name": "Access denied",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName/restore",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "keyspaces",
+                                    ":keyspaceName",
+                                    "tables",
+                                    ":tableName",
+                                    "restore"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "keyspaceName"
+                                    },
+                                    {
+                                      "key": "tableName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:04:30.000Z",
+                              "updatedAt": "2026-06-05T15:04:30.000Z",
+                              "uid": "35240-a6dc3ce8-de85-40bf-a74a-d12c98e2d2ec"
+                            },
+                            {
+                              "id": "8c3957c2-5d3b-41bf-bc1c-b8e2ebb5a081",
+                              "name": "Internal server error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName/restore",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "keyspaces",
+                                    ":keyspaceName",
+                                    "tables",
+                                    ":tableName",
+                                    "restore"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "keyspaceName"
+                                    },
+                                    {
+                                      "key": "tableName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:04:30.000Z",
+                              "updatedAt": "2026-06-05T15:04:30.000Z",
+                              "uid": "35240-8c3957c2-5d3b-41bf-bc1c-b8e2ebb5a081"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-b55a6250-e70f-47ca-855f-eed13178189f"
+                        }
+                      ],
+                      "id": "31a9a8a1-2118-4b0d-831f-cc50f799d754",
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-31a9a8a1-2118-4b0d-831f-cc50f799d754"
+                    },
+                    {
+                      "name": "Amazon Keyspaces Get Table",
+                      "id": "e8e717a1-3641-48e8-9908-7a9f93a311b0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables",
+                            ":tableName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "aff329a6-1722-4a5b-bbef-207aa450c797",
+                              "key": "keyspaceName",
+                              "value": "<string>",
+                              "description": "(Required) The keyspace name."
+                            },
+                            {
+                              "id": "37c45254-aa7c-4a61-8d66-eb355d5f5b34",
+                              "key": "tableName",
+                              "value": "<string>",
+                              "description": "(Required) The table name."
+                            }
+                          ]
+                        },
+                        "description": "Returns information about the table."
+                      },
+                      "response": [
+                        {
+                          "id": "375334dc-0835-4acc-bc91-6d5201393d31",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-375334dc-0835-4acc-bc91-6d5201393d31"
+                        },
+                        {
+                          "id": "08476494-46bf-401c-8f19-ef40be814611",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-08476494-46bf-401c-8f19-ef40be814611"
+                        },
+                        {
+                          "id": "5798bd48-e656-4f75-9b40-85709c57a540",
+                          "name": "Access denied",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-5798bd48-e656-4f75-9b40-85709c57a540"
+                        },
+                        {
+                          "id": "ad951b5a-7749-4268-958d-210353f6a4f4",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-ad951b5a-7749-4268-958d-210353f6a4f4"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-e8e717a1-3641-48e8-9908-7a9f93a311b0"
+                    },
+                    {
+                      "name": "Amazon Keyspaces Update Table",
+                      "id": "01c43672-45f9-48bb-a0ea-8268cf0955f4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables",
+                            ":tableName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "620f4497-b3dd-4842-9d54-ec05c61b4705",
+                              "key": "keyspaceName",
+                              "value": "<string>",
+                              "description": "(Required) The keyspace name."
+                            },
+                            {
+                              "id": "ba034e80-b7d4-4d4e-8110-59c8c1ef9620",
+                              "key": "tableName",
+                              "value": "<string>",
+                              "description": "(Required) The table name."
+                            }
+                          ]
+                        },
+                        "description": "Adds new columns to the table or updates one of the table's existing settings."
+                      },
+                      "response": [
+                        {
+                          "id": "a5cf3b00-3fde-4177-8d86-ff170ecc806d",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-a5cf3b00-3fde-4177-8d86-ff170ecc806d"
+                        },
+                        {
+                          "id": "9746ca1f-9c33-41bf-b3d8-2236504b684b",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-9746ca1f-9c33-41bf-b3d8-2236504b684b"
+                        },
+                        {
+                          "id": "7d79df60-6562-4cbb-931f-357bcc924130",
+                          "name": "Access denied",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-7d79df60-6562-4cbb-931f-357bcc924130"
+                        },
+                        {
+                          "id": "2864d51e-4e6c-4e7c-a9b3-1c52038ca084",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-2864d51e-4e6c-4e7c-a9b3-1c52038ca084"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-01c43672-45f9-48bb-a0ea-8268cf0955f4"
+                    },
+                    {
+                      "name": "Amazon Keyspaces Delete Table",
+                      "id": "66ece985-10d2-49a2-a59a-159966cd7c7c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables",
+                            ":tableName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c3ab3b67-712b-45cf-ae0d-a8297b4dbfba",
+                              "key": "keyspaceName",
+                              "value": "<string>",
+                              "description": "(Required) The keyspace name."
+                            },
+                            {
+                              "id": "48a17ac4-d33a-4bec-a96f-6c186c00aaf7",
+                              "key": "tableName",
+                              "value": "<string>",
+                              "description": "(Required) The table name."
+                            }
+                          ]
+                        },
+                        "description": "The DeleteTable operation deletes a table and all of its data."
+                      },
+                      "response": [
+                        {
+                          "id": "1107e870-5f14-4304-bd9e-3add3a6374b3",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-1107e870-5f14-4304-bd9e-3add3a6374b3"
+                        },
+                        {
+                          "id": "7a0b3734-9d38-48fc-b549-8806d46624bd",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-7a0b3734-9d38-48fc-b549-8806d46624bd"
+                        },
+                        {
+                          "id": "544932ed-a471-4e81-be25-72eb60a8d329",
+                          "name": "Access denied",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-544932ed-a471-4e81-be25-72eb60a8d329"
+                        },
+                        {
+                          "id": "0418fc04-85c8-4c09-93cb-648179dc6ebb",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables/:tableName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "keyspaces",
+                                ":keyspaceName",
+                                "tables",
+                                ":tableName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "keyspaceName"
+                                },
+                                {
+                                  "key": "tableName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:30.000Z",
+                          "updatedAt": "2026-06-05T15:04:30.000Z",
+                          "uid": "35240-0418fc04-85c8-4c09-93cb-648179dc6ebb"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-66ece985-10d2-49a2-a59a-159966cd7c7c"
+                    }
+                  ],
+                  "id": "8f5c29a9-772f-4133-9cdc-b6c8b7898856",
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-8f5c29a9-772f-4133-9cdc-b6c8b7898856"
+                },
+                {
+                  "name": "Amazon Keyspaces Create Table",
+                  "id": "90b79944-2a5e-4024-90a9-54caae1672be",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName",
+                        "tables"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c77f9393-4230-4208-9e5b-e8c8ca5ba371",
+                          "key": "keyspaceName",
+                          "value": "<string>",
+                          "description": "(Required) The keyspace name."
+                        }
+                      ]
+                    },
+                    "description": "The CreateTable operation adds a new table to the specified keyspace."
+                  },
+                  "response": [
+                    {
+                      "id": "0bda4724-6e2c-4811-bf72-0f4313e4ad77",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "keyspaceName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-0bda4724-6e2c-4811-bf72-0f4313e4ad77"
+                    },
+                    {
+                      "id": "5fee9cbc-65db-4ea9-a493-652153affca1",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "keyspaceName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-5fee9cbc-65db-4ea9-a493-652153affca1"
+                    },
+                    {
+                      "id": "29d65402-149d-474f-a4ad-04c64cbe5ba4",
+                      "name": "Access denied",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "keyspaceName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-29d65402-149d-474f-a4ad-04c64cbe5ba4"
+                    },
+                    {
+                      "id": "d3ca544c-16a8-40dd-9fe0-c0549a4ca063",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "keyspaceName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-d3ca544c-16a8-40dd-9fe0-c0549a4ca063"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-90b79944-2a5e-4024-90a9-54caae1672be"
+                },
+                {
+                  "name": "Amazon Keyspaces List Tables",
+                  "id": "d0cd38dd-2e37-4178-bb61-8ffe4236dfa7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName",
+                        "tables"
+                      ],
+                      "variable": [
+                        {
+                          "id": "da70dca3-bbde-40a0-9a27-8b925aa8c744",
+                          "key": "keyspaceName",
+                          "value": "<string>",
+                          "description": "(Required) The keyspace name."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of tables for a specified keyspace."
+                  },
+                  "response": [
+                    {
+                      "id": "ca035893-dc22-4557-90e1-d6ff0a87908a",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "keyspaceName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-ca035893-dc22-4557-90e1-d6ff0a87908a"
+                    },
+                    {
+                      "id": "16a51444-bea3-4a02-8f5f-03f2c459b1de",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "keyspaceName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-16a51444-bea3-4a02-8f5f-03f2c459b1de"
+                    },
+                    {
+                      "id": "228d5b48-3aff-4e96-8cf8-671987b169dd",
+                      "name": "Access denied",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "keyspaceName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-228d5b48-3aff-4e96-8cf8-671987b169dd"
+                    },
+                    {
+                      "id": "f3e64873-1425-4376-bd43-41e89eea7da3",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/keyspaces/:keyspaceName/tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "keyspaces",
+                            ":keyspaceName",
+                            "tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "keyspaceName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:30.000Z",
+                      "updatedAt": "2026-06-05T15:04:30.000Z",
+                      "uid": "35240-f3e64873-1425-4376-bd43-41e89eea7da3"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-d0cd38dd-2e37-4178-bb61-8ffe4236dfa7"
+                }
+              ],
+              "id": "eaed2da1-5f8e-4909-b636-594f885e0c92",
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-eaed2da1-5f8e-4909-b636-594f885e0c92"
+            },
+            {
+              "name": "Amazon Keyspaces Get Keyspace",
+              "id": "e31b7f27-ee89-46cb-ae70-ef92626e855c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces",
+                    ":keyspaceName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "00d03a1f-5369-4287-a408-aae6e4c169c3",
+                      "key": "keyspaceName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the keyspace."
+                    }
+                  ]
+                },
+                "description": "Returns the name and the Amazon Resource Name (ARN) of a keyspace."
+              },
+              "response": [
+                {
+                  "id": "3d5383e2-d75a-4d72-b2ea-bc55a3292933",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "keyspaceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-3d5383e2-d75a-4d72-b2ea-bc55a3292933"
+                },
+                {
+                  "id": "88b1b4dc-0405-4953-b21c-65c4dfb7f9b0",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "keyspaceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-88b1b4dc-0405-4953-b21c-65c4dfb7f9b0"
+                },
+                {
+                  "id": "e66acb82-77e3-4d3a-a69b-d372db3095d4",
+                  "name": "Access denied",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "keyspaceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-e66acb82-77e3-4d3a-a69b-d372db3095d4"
+                },
+                {
+                  "id": "c6623714-6229-43e9-8535-1fa46c0fea80",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "keyspaceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-c6623714-6229-43e9-8535-1fa46c0fea80"
+                }
+              ],
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-e31b7f27-ee89-46cb-ae70-ef92626e855c"
+            },
+            {
+              "name": "Amazon Keyspaces Delete Keyspace",
+              "id": "22f11a0e-f29b-418c-8eda-cd46ff48b64e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces",
+                    ":keyspaceName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f715e3b5-3bdd-4ed9-b370-00e860f630a5",
+                      "key": "keyspaceName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the keyspace."
+                    }
+                  ]
+                },
+                "description": "The DeleteKeyspace operation allows you to delete a keyspace and all of its tables."
+              },
+              "response": [
+                {
+                  "id": "53c94d0f-f7c2-46eb-b5eb-37eace96ab97",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "keyspaceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-53c94d0f-f7c2-46eb-b5eb-37eace96ab97"
+                },
+                {
+                  "id": "94cdd9ab-8f1b-4afa-9823-b644ca69b9dc",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "keyspaceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-94cdd9ab-8f1b-4afa-9823-b644ca69b9dc"
+                },
+                {
+                  "id": "85060996-9075-4f11-9830-d8debd61ad83",
+                  "name": "Access denied",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "keyspaceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-85060996-9075-4f11-9830-d8debd61ad83"
+                },
+                {
+                  "id": "660b0f7a-3363-48b6-b7ba-db91577dbb3d",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/keyspaces/:keyspaceName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "keyspaces",
+                        ":keyspaceName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "keyspaceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:04:30.000Z",
+                  "updatedAt": "2026-06-05T15:04:30.000Z",
+                  "uid": "35240-660b0f7a-3363-48b6-b7ba-db91577dbb3d"
+                }
+              ],
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-22f11a0e-f29b-418c-8eda-cd46ff48b64e"
+            }
+          ],
+          "id": "29eba2c7-f711-4e34-adc6-c460e457be4c",
+          "createdAt": "2026-06-05T15:04:30.000Z",
+          "updatedAt": "2026-06-05T15:04:30.000Z",
+          "uid": "35240-29eba2c7-f711-4e34-adc6-c460e457be4c"
+        },
+        {
+          "name": "Amazon Keyspaces Create Keyspace",
+          "id": "a1471904-bd98-4831-a0e0-6a5d4b237939",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/keyspaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "keyspaces"
+              ]
+            },
+            "description": "Creates a new keyspace."
+          },
+          "response": [
+            {
+              "id": "a5798b38-0734-438a-ade2-1587aef66c82",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-a5798b38-0734-438a-ade2-1587aef66c82"
+            },
+            {
+              "id": "2e248dac-164f-49b6-bc31-9ebcce602a8f",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-2e248dac-164f-49b6-bc31-9ebcce602a8f"
+            },
+            {
+              "id": "ce13bfa6-9d6c-4c82-a50a-e85a5dad85a1",
+              "name": "Access denied",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-ce13bfa6-9d6c-4c82-a50a-e85a5dad85a1"
+            },
+            {
+              "id": "243c285a-61d4-4016-8d10-dc6ab0b441e3",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-243c285a-61d4-4016-8d10-dc6ab0b441e3"
+            }
+          ],
+          "createdAt": "2026-06-05T15:04:30.000Z",
+          "updatedAt": "2026-06-05T15:04:30.000Z",
+          "uid": "35240-a1471904-bd98-4831-a0e0-6a5d4b237939"
+        },
+        {
+          "name": "Amazon Keyspaces List Keyspaces",
+          "id": "672c7948-53d1-4d2f-b07c-fd84e54491a4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/keyspaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "keyspaces"
+              ]
+            },
+            "description": "Returns a list of keyspaces."
+          },
+          "response": [
+            {
+              "id": "0f6b3773-19e0-4b35-9e9f-3583d33e685d",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-0f6b3773-19e0-4b35-9e9f-3583d33e685d"
+            },
+            {
+              "id": "78fc9d29-ce57-47fd-bc93-df42ec47da84",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-78fc9d29-ce57-47fd-bc93-df42ec47da84"
+            },
+            {
+              "id": "60b21f18-0ad4-4d05-a4a7-5070bf654770",
+              "name": "Access denied",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-60b21f18-0ad4-4d05-a4a7-5070bf654770"
+            },
+            {
+              "id": "f2ce86e1-38ba-4dba-97a2-3005a0e549c8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/keyspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "keyspaces"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:04:30.000Z",
+              "updatedAt": "2026-06-05T15:04:30.000Z",
+              "uid": "35240-f2ce86e1-38ba-4dba-97a2-3005a0e549c8"
+            }
+          ],
+          "createdAt": "2026-06-05T15:04:30.000Z",
+          "updatedAt": "2026-06-05T15:04:30.000Z",
+          "uid": "35240-672c7948-53d1-4d2f-b07c-fd84e54491a4"
+        }
+      ],
+      "id": "79472316-48b3-435e-ac0f-6fa31c00ee76",
+      "createdAt": "2026-06-05T15:04:30.000Z",
+      "updatedAt": "2026-06-05T15:04:30.000Z",
+      "uid": "35240-79472316-48b3-435e-ac0f-6fa31c00ee76"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cassandra.us-east-1.amazonaws.com"
+    }
+  ]
+}

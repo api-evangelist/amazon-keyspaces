@@ -3,11 +3,12 @@
   "feeds": [
     {
       "source": "https://aws.amazon.com/blogs/database/category/database/amazon-keyspaces/",
-      "feed_url": "https://aws.amazon.com/rss/",
-      "title": "Recent Announcements",
-      "saved": 46
+      "feed_url": "https://aws.amazon.com/blogs/database/feed/",
+      "title": "AWS Database Blog",
+      "saved": 0,
+      "method": "feed"
     }
   ],
   "post_count": 155,
-  "fetched": "2026-06-01T23:00:37Z"
+  "fetched": "2026-06-07T00:00:00Z"
 }
