@@ -55,6 +55,14 @@ apis:
       - type: JSONSchema
         url: json-schema/amazon-keyspaces-table-schema.json
 common:
+  - type: TrustCenter
+    url: security/amazon-keyspaces-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-keyspaces-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-keyspaces-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-keyspaces-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-keyspaces/overview
   - type: Arazzo
