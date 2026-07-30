@@ -7,6 +7,19 @@ description: >-
   database service that lets you run Cassandra workloads on AWS without managing servers or software.
 url: https://aws.amazon.com/keyspaces/
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 tags:
   - AWS
@@ -18,42 +31,62 @@ tags:
 created: '2024-01-15'
 modified: '2026-05-19'
 apis:
-  - name: Amazon Keyspaces API
-    description: >-
-      The Amazon Keyspaces API provides programmatic access to manage Cassandra-compatible keyspaces and tables,
-      configure capacity modes, encryption, and point-in-time recovery for serverless Cassandra workloads.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://aws.amazon.com/keyspaces/
-    baseURL: https://cassandra.amazonaws.com
-    tags:
-      - Cassandra
-      - NoSQL Database
-      - Serverless
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/keyspaces/latest/devguide/what-is-keyspaces.html
-      - type: OpenAPI
-        url: https://api.apis.guru/v2/specs/amazonaws.com/keyspaces/2022-02-10/openapi.yaml
-      - type: Pricing
-        url: https://aws.amazon.com/keyspaces/pricing/
-      - type: GettingStarted
-        url: https://aws.amazon.com/keyspaces/getting-started/
-      - type: FAQ
-        url: https://aws.amazon.com/keyspaces/faqs/
-      - type: Features
-        url: https://aws.amazon.com/keyspaces/features/
-      - type: Documentation
-        url: https://docs.aws.amazon.com/keyspaces/latest/devguide/what-is-keyspaces.html
-      - type: APIReference
-        url: https://docs.aws.amazon.com/keyspaces/latest/APIReference/Welcome.html
-      - type: OpenAPI
-        url: openapi/amazon-keyspaces-openapi.yml
-      - type: JSONLD
-        url: json-ld/amazon-keyspaces-context.jsonld
-      - type: JSONSchema
-        url: json-schema/amazon-keyspaces-keyspace-schema.json
-      - type: JSONSchema
-        url: json-schema/amazon-keyspaces-table-schema.json
+- aid: amazon-keyspaces:amazon-keyspaces-keyspaces-api
+  name: Amazon Keyspaces Keyspaces API
+  description: Cassandra keyspace management
+  humanURL: https://aws.amazon.com/keyspaces/
+  baseURL: https://cassandra.amazonaws.com
+  tags:
+  - Keyspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-keyspaces-keyspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/keyspaces/latest/devguide/what-is-keyspaces.html
+  - type: Pricing
+    url: https://aws.amazon.com/keyspaces/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/keyspaces/getting-started/
+  - type: FAQ
+    url: https://aws.amazon.com/keyspaces/faqs/
+  - type: Features
+    url: https://aws.amazon.com/keyspaces/features/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/keyspaces/latest/APIReference/Welcome.html
+  - type: JSONLD
+    url: json-ld/amazon-keyspaces-context.jsonld
+  - type: JSONSchema
+    url: json-schema/amazon-keyspaces-keyspace-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-keyspaces-table-schema.json
+- aid: amazon-keyspaces:amazon-keyspaces-tables-api
+  name: Amazon Keyspaces Tables API
+  description: Cassandra table management
+  humanURL: https://aws.amazon.com/keyspaces/
+  baseURL: https://cassandra.amazonaws.com
+  tags:
+  - Tables
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-keyspaces-tables-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/keyspaces/latest/devguide/what-is-keyspaces.html
+  - type: Pricing
+    url: https://aws.amazon.com/keyspaces/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/keyspaces/getting-started/
+  - type: FAQ
+    url: https://aws.amazon.com/keyspaces/faqs/
+  - type: Features
+    url: https://aws.amazon.com/keyspaces/features/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/keyspaces/latest/APIReference/Welcome.html
+  - type: JSONLD
+    url: json-ld/amazon-keyspaces-context.jsonld
+  - type: JSONSchema
+    url: json-schema/amazon-keyspaces-keyspace-schema.json
+  - type: JSONSchema
+    url: json-schema/amazon-keyspaces-table-schema.json
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-keyspaces-agentic-access.yml
