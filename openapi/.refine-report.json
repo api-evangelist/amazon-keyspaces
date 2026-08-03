@@ -1,0 +1,16 @@
+{
+  "provider": "amazon-keyspaces",
+  "sources": [
+    "amazon-keyspaces-keyspaces-api-openapi.yml",
+    "amazon-keyspaces-tables-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-keyspaces-keyspaces-api-openapi.yml",
+    "amazon-keyspaces-tables-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
