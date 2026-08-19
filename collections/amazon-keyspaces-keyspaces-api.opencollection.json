@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Keyspaces API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Keyspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Keyspaces List Keyspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cassandra.us-east-1.amazonaws.com/keyspaces"
+          },
+          "docs": "Returns a list of keyspaces."
+        },
+        {
+          "info": {
+            "name": "Amazon Keyspaces Create Keyspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cassandra.us-east-1.amazonaws.com/keyspaces"
+          },
+          "docs": "Creates a new keyspace."
+        },
+        {
+          "info": {
+            "name": "Amazon Keyspaces Get Keyspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cassandra.us-east-1.amazonaws.com/keyspaces/:keyspaceName",
+            "params": [
+              {
+                "name": "keyspaceName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the keyspace."
+              }
+            ]
+          },
+          "docs": "Returns the name and the Amazon Resource Name (ARN) of a keyspace."
+        },
+        {
+          "info": {
+            "name": "Amazon Keyspaces Delete Keyspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cassandra.us-east-1.amazonaws.com/keyspaces/:keyspaceName",
+            "params": [
+              {
+                "name": "keyspaceName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the keyspace."
+              }
+            ]
+          },
+          "docs": "The DeleteKeyspace operation allows you to delete a keyspace and all of its tables."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
