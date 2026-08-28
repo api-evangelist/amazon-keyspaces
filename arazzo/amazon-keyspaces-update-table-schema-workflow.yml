@@ -13,8 +13,8 @@ info:
     follow the canonical AWS Keyspaces UpdateTable request contract.
   version: 1.0.0
 sourceDescriptions:
-- name: keyspacesApi
-  url: ../openapi/amazon-keyspaces-openapi.yml
+- name: tablesApi
+  url: ../openapi/amazon-keyspaces-tables-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: update-table-schema

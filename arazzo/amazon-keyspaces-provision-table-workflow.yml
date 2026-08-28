@@ -16,7 +16,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: keyspacesApi
-  url: ../openapi/amazon-keyspaces-openapi.yml
+  url: ../openapi/amazon-keyspaces-keyspaces-api-openapi.yml
+  type: openapi
+- name: tablesApi
+  url: ../openapi/amazon-keyspaces-tables-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-table
