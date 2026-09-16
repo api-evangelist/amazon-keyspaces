@@ -102,6 +102,8 @@ apis:
   - type: JSONSchema
     url: json-schema/amazon-keyspaces-table-schema.json
 common:
+- type: Website
+  url: https://amazon.com
 - type: AgenticAccess
   url: agentic-access/amazon-keyspaces-agentic-access.yml
 - type: TrustCenter
