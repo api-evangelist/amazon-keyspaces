@@ -1,4 +1,4 @@
-# Amazon Keyspaces (amazon-keyspaces)
+# Amazon Keyspaces
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,86 +66,183 @@
 
 Amazon Keyspaces (for Apache Cassandra) is a scalable, highly available, and managed Apache Cassandra-compatible database service that lets you run Cassandra workloads on AWS without managing servers or software.
 
-**APIs.json:** [https://aws.amazon.com/keyspaces/](https://aws.amazon.com/keyspaces/)
+**Areas:** AWS · Cassandra · Database · Managed Database · NoSQL · Wide Column
 
-## Scope
+## Amazon Keyspaces on APIs.io
 
-- **Type:** Index
+Everything profiled for Amazon Keyspaces is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amazon-keyspaces/](https://apis.io/providers/amazon-keyspaces/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-- AWS
-- Cassandra
-- Database
-- Managed Database
-- NoSQL
-- Wide Column
+- [Amazon Keyspaces API](https://apis.io/apis/amazon-keyspaces/amazon-keyspaces-keyspaces-api/) — Cassandra keyspace management
+- [Amazon Keyspaces Tables API](https://apis.io/apis/amazon-keyspaces/amazon-keyspaces-tables-api/) — Cassandra table management
+- [Amazon Keyspaces Keyspaces Operations API](https://apis.io/apis/amazon-keyspaces/amazon-keyspaces-operations-api/) — The Keyspaces Operations API from Amazon Keyspaces — 4 operation(s) for keyspaces operations.
+- [Amazon Keyspaces Keyspaces Type API](https://apis.io/apis/amazon-keyspaces/amazon-keyspaces-type-api/) — The Keyspaces Type API from Amazon Keyspaces — 4 operation(s) for keyspaces type.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (6)
 
-### Amazon Keyspaces API
+Multi-step workflows that chain operations into a business task.
 
-The Amazon Keyspaces API provides programmatic access to manage Cassandra-compatible keyspaces and tables, configure capacity modes, encryption, and point-in-time recovery for serverless Cassandra workloads.
+- [Amazon Keyspaces Clone Table Schema](https://apis.io/arazzos/amazon-keyspaces/amazon-keyspaces-clone-table-workflow/)
+- [Amazon Keyspaces Decommission Keyspace](https://apis.io/arazzos/amazon-keyspaces/amazon-keyspaces-decommission-keyspace-workflow/)
+- [Amazon Keyspaces Keyspace Inventory](https://apis.io/arazzos/amazon-keyspaces/amazon-keyspaces-keyspace-inventory-workflow/)
+- [Amazon Keyspaces Provision Table](https://apis.io/arazzos/amazon-keyspaces/amazon-keyspaces-provision-table-workflow/)
+- [Amazon Keyspaces Restore Table](https://apis.io/arazzos/amazon-keyspaces/amazon-keyspaces-restore-table-workflow/)
+- [Amazon Keyspaces Update Table Schema](https://apis.io/arazzos/amazon-keyspaces/amazon-keyspaces-update-table-schema-workflow/)
 
-- **Human URL:** [https://aws.amazon.com/keyspaces/](https://aws.amazon.com/keyspaces/)
-- **Base URL:** `https://cassandra.amazonaws.com`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Cassandra
-- NoSQL Database
-- Serverless
+- [Amazon Keyspaces Agentic Access](https://apis.io/agentic-access/amazon-keyspaces/amazon-keyspaces-agentic-access/)
 
-#### Properties
+#### JSON Schema (2)
 
-- [Documentation](https://docs.aws.amazon.com/keyspaces/latest/devguide/what-is-keyspaces.html)
-- [OpenAPI](https://api.apis.guru/v2/specs/amazonaws.com/keyspaces/2022-02-10/openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Pricing](https://aws.amazon.com/keyspaces/pricing/)
-- [Getting Started](https://aws.amazon.com/keyspaces/getting-started/)
-- [F A Q](https://aws.amazon.com/keyspaces/faqs/)
-- [Features](https://aws.amazon.com/keyspaces/features/)
-- [Documentation](https://docs.aws.amazon.com/keyspaces/latest/devguide/what-is-keyspaces.html)
-- [API Reference](https://docs.aws.amazon.com/keyspaces/latest/APIReference/Welcome.html)
-- [OpenAPI](openapi/amazon-keyspaces-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amazon-keyspaces.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amazon-keyspaces.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON-LD](json-ld/amazon-keyspaces-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/amazon-keyspaces-keyspace-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/amazon-keyspaces-table-schema.json) — [JSON Schema](https://json-schema.org/specification)
+The data models the API reads and writes.
 
-## Common Properties
+- [Keyspace](https://apis.io/schemas/amazon-keyspaces/amazon-keyspaces-keyspace/)
+- [Table](https://apis.io/schemas/amazon-keyspaces/amazon-keyspaces-table/)
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Blog](https://aws.amazon.com/blogs/database/category/database/amazon-keyspaces/)
-- [Support](https://aws.amazon.com/premiumsupport/)
-- [Console](https://console.aws.amazon.com/keyspaces/home)
-- [C L I](https://docs.aws.amazon.com/cli/latest/reference/keyspaces/)
-- [SDK](https://aws.amazon.com/tools/)
-- [Status Page](https://status.aws.amazon.com/)
-- [Compliance](https://aws.amazon.com/compliance/)
-- [Terms of Service](https://aws.amazon.com/service-terms/)
-- [Portal](https://aws.amazon.com/keyspaces/)
+#### JSON Structure (2)
+
+Data models expressed in JSON Structure.
+
+- [Amazon Keyspaces Keyspace Structure](https://apis.io/json-structure/amazon-keyspaces/amazon-keyspaces-keyspace-structure/)
+- [Amazon Keyspaces Table Structure](https://apis.io/json-structure/amazon-keyspaces/amazon-keyspaces-table-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Amazon Keyspaces Context](https://apis.io/jsonld/amazon-keyspaces/amazon-keyspaces-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Amazon Keyspaces Vocabulary](https://apis.io/vocabularies/amazon-keyspaces/amazon-keyspaces-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Amazon Keyspaces Keyspace Example](https://apis.io/examples/amazon-keyspaces/amazon-keyspaces-keyspace-example/)
+- [Amazon Keyspaces Table Example](https://apis.io/examples/amazon-keyspaces/amazon-keyspaces-table-example/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Amazon Keyspaces API](https://apis.io/collections/amazon-keyspaces/open-amazon-keyspaces/)
+- [Amazon Keyspaces API](https://apis.io/collections/amazon-keyspaces/open-amazon-keyspaces-keyspaces-api/)
+- [Amazon Keyspaces Tables API](https://apis.io/collections/amazon-keyspaces/open-amazon-keyspaces-tables-api/)
+- [Amazon Keyspaces API](https://apis.io/collections/amazon-keyspaces/postman-amazon-keyspaces/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Amazon Keyspaces — jsonschema rules](https://apis.io/rules/amazon-keyspaces/amazon-keyspaces-jsonschema-spectral-rules/)
+- [Amazon Keyspaces API Rules](https://apis.io/rules/amazon-keyspaces/amazon-keyspaces-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amazon Keyspaces Authentication](https://apis.io/security/amazon-keyspaces/amazon-keyspaces-authentication/)
+- [Amazon Keyspaces Domain Security](https://apis.io/security/amazon-keyspaces/amazon-keyspaces-domain-security/)
+- [Amazon Keyspaces Trust Center](https://apis.io/security/amazon-keyspaces/amazon-keyspaces-trust-center/)
+- [Amazon Keyspaces Vulnerability Disclosure](https://apis.io/security/amazon-keyspaces/amazon-keyspaces-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amazon Keyspaces Plans Pricing](https://apis.io/plans/amazon-keyspaces/amazon-keyspaces-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amazon Keyspaces Rate Limits](https://apis.io/rate-limits/amazon-keyspaces/amazon-keyspaces-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Amazon Keyspaces Finops](https://apis.io/finops/amazon-keyspaces/amazon-keyspaces-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://aws.amazon.com/keyspaces/)
 - [Documentation](https://docs.aws.amazon.com/keyspaces/)
+- [Getting started](https://aws.amazon.com/keyspaces/getting-started/)
 - [Pricing](https://aws.amazon.com/keyspaces/pricing/)
-- [Getting Started](https://aws.amazon.com/keyspaces/getting-started/)
-- [F A Q](https://aws.amazon.com/keyspaces/faqs/)
-- [Privacy Policy](https://aws.amazon.com/privacy/)
-- [Sign Up](https://portal.aws.amazon.com/billing/signup)
-- [GitHub Organization](https://github.com/aws)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Spectral Rules](rules/amazon-keyspaces-spectral-rules.yml)
-- [Vocabulary](vocabulary/amazon-keyspaces-vocabulary.yaml)
-- [Integrations](https://aws.amazon.com/marketplace)
+- [Support](https://aws.amazon.com/premiumsupport/)
+- [Blog](https://aws.amazon.com/blogs/database/category/database/amazon-keyspaces/)
+- [Compliance](https://aws.amazon.com/compliance/)
+- [Terms of service](https://aws.amazon.com/service-terms/)
+- [Privacy policy](https://aws.amazon.com/privacy/)
+- [GitHub](https://github.com/aws)
+- [Status](https://status.aws.amazon.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 62.1** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 61.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 77.4 |
+| Access clarity | 68.4 |
+
+**Agent readiness 21.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amazon-keyspaces/](https://apis.io/providers/amazon-keyspaces/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amazon Keyspaces: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amazon-keyspaces/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
